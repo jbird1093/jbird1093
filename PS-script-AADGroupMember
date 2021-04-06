@@ -1,0 +1,8 @@
+#Gather User and Dynamic Group Information
+$UserUPN = Read-Host -Prompt "Please enter new user email address"
+$Group = Read-Host -Prompt "Please enter the Dynamic Group Display Name"
+
+$GroupObjectID = (Get-AzureADGroup -SearchString "$Group").ObjectID
+$User = Get-AzureADUser -ObjectID $UserUPN
+$UserObjectID = $User.ObjectID
+Add-AzureADGroupMember -ObjectId $GroupObjectID -RefObjectID $UserObjectID
